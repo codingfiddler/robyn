@@ -1,6 +1,7 @@
 from enum import Enum
 import logging
 from typing import Optional
+from datetime import datetime
 
 
 class Colors(Enum):
@@ -27,7 +28,7 @@ class Logger:
         bold: bool,
         underline: bool,
     ):
-        result = msg
+        result = f"msg{datetime.now()}"
         if color is not None:
             result = f"{color.value}{result}{Logger.ENDC}"
         if bold:
@@ -43,8 +44,7 @@ class Logger:
         bold: bool = False,
         underline: bool = False,
     ):
-        log = self.logger
-        log.error(self._format_msg(msg, color, bold, underline))
+        self.logger.error(self._format_msg(msg, color, bold, underline))
 
     def warn(
         self,
